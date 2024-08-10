@@ -4,6 +4,7 @@ const users =[
         email: "Emado@gmail.com",
         username: "John Doe",
         
+        
     },
     {
         uid: 'k4jh5k4j5h4k5h4',
@@ -38,11 +39,15 @@ const createUser = (request, response) =>{
 
     //console.log(query);
 
-    const userVerification = users.find((user) => user.uid === query.uid);
+   const userVerification = users.find((user) => user.uid === query.uid);
     if (userVerification) {
         return response.status(409).json({
             error: "hey pa, ya existe mi fafa",
         });
+    }else{
+        return response.status(201).json({
+            msj: "creación exitosa"
+        })
     }
 
     const RegisterNewUser = {
