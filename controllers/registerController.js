@@ -20,7 +20,7 @@ const users =[
 const listUser = (request, response) =>{
     const {query} = request;
 
-    console.log(query);
+    //console.log(query);
 
     const result= users.filter((user) => user.uid === query.uid);
 
