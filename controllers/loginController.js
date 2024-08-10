@@ -2,11 +2,12 @@ const users =[
     {
         uid: 'asdw345dasdas',
         email: "jhon.doe@gmail.com",
-        username: "John Doe",
+        name: "John Doe",
+        PhotoUrl: "xxxxdfasd.jpg",
     },
 ];
 
-const listUsers = (request, response) =>{
+const listLogin = (request, response) =>{
     const {query} = request;
 
     console.log(query);
@@ -22,5 +23,5 @@ const listUsers = (request, response) =>{
     response.json(result);
 };
 module.exports ={
-    listUsers,
+    listLogin,
 };
