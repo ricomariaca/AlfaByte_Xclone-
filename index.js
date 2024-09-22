@@ -2,13 +2,19 @@ const express = require("express");
 const app = express();
 const port = 2001;
 
-const router = require("./routes/apiRoutes");
+//const router = require("./routes/apiRoutes");
+const routerPost = require("./Tweet/Router/apiRouter");
+const routerAuth = require("./Auth/Router/apiRouter");
+const routerFollow = require("./Follow/Router/apiRouter");
+
 
 //app.get("/", (req, res) => {
 //    res.send("Hola, esta es una petición izy!");
 //});
 
-app.use('/api', router);
+app.use('/api', routerPost);
+app.use('/api', routerAuth);
+app.use('/api', routerFollow);
 
 app.listen(port, () => {
     console.log(`La app está escuchando en http://localhost:${port}`);
