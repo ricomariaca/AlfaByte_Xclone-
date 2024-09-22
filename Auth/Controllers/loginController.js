@@ -1,27 +1,42 @@
-const users =[
+const users = [
     {
         uid: 'asdw345dasdas',
         email: "jhon.doe@gmail.com",
         name: "John Doe",
-        PhotoUrl: "xxxxdfasd.jpg",
+        photoUrl: "xxxxdfasd.jpg",
+        password: "password123",
     },
 ];
 
-const listLogin = (request, response) =>{
-    const {query} = request;
+const listLogin = (request, response) => {
+    const { email, password } = request; 
 
-    console.log(query);
+  
+    const user = users.find((user) => user.email === email);
 
-    const result= users.filter((user) => user.uid === query.uid);
-
-
-    if(result.length === 0){
+    
+    if (!user) {
         return response.status(404).json({
-                error: "not found",
-            });
+            error: "Usuario no encontrado",
+        });
     }
-    response.json(result);
+
+    
+    if (user.password !== password) {
+        return response.status(401).json({
+            error: "Contraseña incorrecta",
+        });
+    }
+
+   
+    return response.status(200).json({
+        uid: user.uid,
+        email: user.email,
+        name: user.name,
+        photoUrl: user.photoUrl,
+    });
 };
-module.exports ={
+
+module.exports = {
     listLogin,
 };

@@ -1,29 +1,44 @@
-const posts = 
-[
+const posts = [
     {
+        uid: 'asdw345dasdas',
         id: new Date().getMilliseconds(),
-        title: "Mi posts",
-        body: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will gr-builder of human happiness. No one rejects, dislikes, or avoids ple"
-
+        title: "Mi post",
+        body: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born..."
     }
-]
+];
 
-const listPosts = (request, response) =>{
-    const {query} = request;
+const listPosts = (req, res) => {
+    const { query } = req;
 
-    console.log(query);
+    const result = posts.filter((post) => post.uid === query.uid);
 
-    const result= posts.filter((user) => user.uid === query.uid);
-
-
-    if(result.length === 0){
-        return response.status(404).json({
-                error: "not found",
-            });
+    if (result.length === 0) {
+        return res.status(404).json({
+            error: "No se encontraron posts para este UID",
+        });
     }
-    response.json(result);
+
+    res.json(result);
 };
 
-module.exports ={
+const createPost = (req, res) => {
+    const { title, body } = req;
+
+    const newPost = {
+        id: new Date().getMilliseconds(),
+        title,
+        body,
+    };
+
+    posts.push(newPost);
+
+    res.status(201).json({
+        mensaje: "Publicación exitosa",
+        post: newPost
+    });
+};
+
+module.exports = {
     listPosts,
+    createPost,
 };
