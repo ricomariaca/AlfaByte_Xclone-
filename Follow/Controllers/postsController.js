@@ -13,7 +13,7 @@ const listPosts = (request, response) =>{
 
     console.log(query);
 
-    const result= users.filter((user) => user.uid === query.uid);
+    const result= posts.filter((user) => user.uid === query.uid);
 
 
     if(result.length === 0){
