@@ -18,14 +18,14 @@ const bcrypt = require('bcrypt');
   };
   
   const createUser = async (req, res = response) => {
-  const { phoneNumber, name, email, password } = req.body;
+  const { phoneNumber, name, email, password,following,followers } = req.body;
   const saltRounds = 10;
 
   try {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
    
-    let user = new User({ name, email, password: hashedPassword, phoneNumber });
+    let user = new User({ name, email, password: hashedPassword, phoneNumber, following,followers });
 
     
     await user.save();
