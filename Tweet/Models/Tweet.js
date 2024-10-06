@@ -5,7 +5,12 @@ const TweetSchema = Schema({
     type: String,
     require: true
   },
-  description: {
+  body: {
+    type: String,
+    require: true 
+  }
+  ,
+  id_User: {
     type: String,
     require: true 
   }

@@ -6,9 +6,9 @@ const { validationResult } = require('express-validator');
 
 
 routerPost.get('/listPosts', listPosts);
-routerPost.get('/createPosts', createPost);
+//routerPost.get('/createPosts', createPost);
 
-routerPost.post('/posts', validatePost, (req, res, next) => {
+routerPost.post('/createPosts', validatePost, (req, res, next) => {
    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
