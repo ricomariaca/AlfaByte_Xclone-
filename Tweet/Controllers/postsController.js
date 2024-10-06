@@ -1,11 +1,5 @@
-const posts = [
-    {
-        uid: 'asdw345dasdas',
-        id: new Date().getMilliseconds(),
-        title: "Mi post",
-        body: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born..."
-    }
-];
+const {response } = require('express');
+const Tweet =require('../../Tweet/Models/Tweet')
 
 const listPosts = (req, res) => {
     const { query } = req;
@@ -21,22 +15,33 @@ const listPosts = (req, res) => {
     res.json(result);
 };
 
-const createPost = (req, res) => {
-    const { title, body } = req;
+const createPost = async (req, res = response) => {
+    const { title, body, id_User} = req.body;
+  
+    try {
+     
+      let tweet = new Tweet({  title, body, id_User });
 
-    const newPost = {
-        id: new Date().getMilliseconds(),
-        title,
-        body,
-    };
-
-    posts.push(newPost);
-
-    res.status(201).json({
-        mensaje: "Publicación exitosa",
-        post: newPost
-    });
-};
+      await tweet.save();
+  
+      res.status(201).json({
+        ok: true,
+        message: "tweet save",
+        user: {
+          id_tweet: tweet.id,
+          title: tweet.email,
+          body: tweet.body,
+         id_user: tweet.id_User
+        },
+      });
+    } catch (error) {
+      console.log("(ERROR)", error);
+      res.status(500).json({
+        ok: false,
+        error: "SOMETHING WENT WRONG, CHECK YOUR DATA AGAIN",
+      });
+    }
+  };
 
 module.exports = {
     listPosts,

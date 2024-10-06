@@ -3,8 +3,7 @@ const {MONGO_ATLAS, DB_NAME}= process.env;
 
 const dbConnection= async() => {
   try {
-    console.log("MONGO_ATLAS:", MONGO_ATLAS);
-    await mongoose.connect(MONGO_ATLAS);
+    await mongoose.connect(MONGO_ATLAS+DB_NAME);
     console.log("[INFO] MONGODB is ONLINE!!!!!!");
     
   } catch (error) {
