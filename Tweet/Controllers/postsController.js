@@ -1,3 +1,6 @@
+const {response } = require('express');
+const { Tweet } =require('../../Tweet/Models/Tweet')
+
 const posts = [
     {
         uid: 'asdw345dasdas',
@@ -21,21 +24,30 @@ const listPosts = (req, res) => {
     res.json(result);
 };
 
-const createPost = (req, res) => {
-    const { title, body } = req;
+const createPost = async (req, res=response) => {
 
-    const newPost = {
-        id: new Date().getMilliseconds(),
-        title,
-        body,
-    };
-
-    posts.push(newPost);
-
-    res.status(201).json({
-        mensaje: "Publicación exitosa",
-        post: newPost
-    });
+    try {
+        const newTweet= new Tweet({
+            title: 'la vaquita',
+            description: 'la vaquita lolaaaaa'
+           });
+        
+           await newTweet.save();
+        
+           res.json({
+            ok: true,
+            data:{
+                title: newTweet.title,
+                description: newTweet.description
+            }
+           });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            error:"antonio writes, writes"
+        })
+    }
 };
 
 module.exports = {

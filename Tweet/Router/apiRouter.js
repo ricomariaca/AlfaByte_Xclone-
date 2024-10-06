@@ -5,8 +5,8 @@ const { validatePost } = require('../Validators/postsValidators');
 const { validationResult } = require('express-validator');
 
 
-routerPost.get('/posts', listPosts);
-
+routerPost.get('/listPosts', listPosts);
+routerPost.get('/createPosts', createPost);
 
 routerPost.post('/posts', validatePost, (req, res, next) => {
    

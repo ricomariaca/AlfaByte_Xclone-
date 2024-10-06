@@ -3,7 +3,7 @@ const routerAuth = express.Router();
 
 
 const { createUser } = require('../Controllers/registerController');
-const { listLogin } = require('../Controllers/loginController');
+const { LoginUser } = require('../Controllers/loginController');
 const { validateCreateUser} = require('../Validators/registerValidators');
 const { validateLogin} = require('../Validators/loginValidators');
 const { validationResult } = require('express-validator');
@@ -25,7 +25,7 @@ routerAuth.post('/login', validateLogin, (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-    listLogin(req, res, next);
+    LoginUser(req, res, next);
 });
 
 module.exports = routerAuth;
