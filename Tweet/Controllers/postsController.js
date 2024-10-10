@@ -1,7 +1,7 @@
 const {response } = require('express');
 const Tweet =require('../../Tweet/Models/Tweet')
 
-const listPosts = (req, res) => {
+const listPosts = (req, res = response) => {
     const { query } = req;
 
     const result = posts.filter((post) => post.uid === query.uid);

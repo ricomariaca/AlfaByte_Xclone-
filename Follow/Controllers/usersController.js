@@ -1,19 +1,6 @@
-const users = [
-    {
-        uid: 'asdw345dasdas',
-        email: "jhon.doe@gmail.com",
-        username: "John Doe",
-        following: [
-            {"id": 2, "name": "María"},
-            {"id": 3, "name": "Luis"}
-          ],
-        followers: [
-            {"id": 4, "name": "Ana"},
-            {"id": 5, "name": "Jorge"}
-          ],
-    },
-];
 
+const { response } = require('express');
+const User = require('../../Auth/Models/User')
 const listUsers = (request, response) =>{
     const {query} = request;
 
@@ -30,50 +17,53 @@ const listUsers = (request, response) =>{
     response.json(result);
 };
 
-const listFollowing = (request, response) =>{
-    const {query} = request;
+const listFollowing = async (req, res = response) => {
+    const { email } = req.body;
 
-    console.log(query);
+    try {
+        const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({
+          ok: false,
+          error: "Usuario no encontrado!",
+        });
+      }
+        res.status(200).json({
+            ok: true,
+            following: user.following
+        });
 
-    const user = users.find((user) => user.uid === query.uid);
-
-    if (!user) {
-        return response.status(404).json({
-            error: "user no encontrado",
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener la lista de following.'
         });
     }
-
-    if (user.following.length === 0) {
-        return response.status(200).json({
-            message: "No estás siguiendo a nadie.",
-        });
-    }
-
-    response.json(user.following);
 };
+const listFollowers = async (req, res= response) =>{
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({
+          ok: false,
+          error: "Usuario no encontrado!",
+        });
+      }
+        res.status(200).json({
+            ok: true,
+            followers: user.followers
+        });
 
-const listFollowers = (request, response) =>{
-    const {query} = request;
-
-    console.log(query);
-
-    const user = users.find((user) => user.uid === query.uid);
-
-    if (!user) {
-        return response.status(404).json({
-            error: "Usuario no encontrado",
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener la lista de followers.'
         });
     }
-
-    if (user.followers.length === 0) {
-        return response.status(200).json({
-            message: "No tienes seguidores.",
-        });
-    }
-
-    response.json(user.followers);
 };
-
 module.exports = {
     listUsers,
     listFollowers,

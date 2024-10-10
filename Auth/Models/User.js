@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const UserSchema = Schema({
   phoneNumber: {
-    type: String,
+    type: BigInt,
     required: true,
   },
   name: {
@@ -20,10 +20,15 @@ const UserSchema = Schema({
   },
   following: [
     {
-      id: {
-        type: Schema.Types.ObjectId, 
+      id_user: {
+        type: Number, 
         ref: 'User',
         required:false
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
       },
       name: {
         type: String,
@@ -33,10 +38,15 @@ const UserSchema = Schema({
   ],
   followers: [
     {
-      id: {
-        type: Schema.Types.ObjectId,
+      id_user: {
+        type: Number,
         ref: 'User',
         required:false
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
       },
       name: {
         type: String,
