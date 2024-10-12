@@ -175,7 +175,6 @@ routerAuth.post('/register', validateCreateUser, (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
   
- 
   createUser(req, res, next);
 });
 
