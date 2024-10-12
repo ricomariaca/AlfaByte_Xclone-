@@ -1,20 +1,6 @@
 const {response } = require('express');
 const Tweet =require('../../Tweet/Models/Tweet')
 
-const listPosts = (req, res = response) => {
-    const { query } = req;
-
-    const result = posts.filter((post) => post.uid === query.uid);
-
-    if (result.length === 0) {
-        return res.status(404).json({
-            error: "No se encontraron posts para este UID",
-        });
-    }
-
-    res.json(result);
-};
-
 const createPost = async (req, res = response) => {
     const { title, body, id_User} = req.body;
   
@@ -44,6 +30,6 @@ const createPost = async (req, res = response) => {
   };
 
 module.exports = {
-    listPosts,
+    
     createPost,
 };
