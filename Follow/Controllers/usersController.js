@@ -1,21 +1,6 @@
 
 const { response } = require('express');
 const User = require('../../Auth/Models/User')
-const listUsers = (request, response) =>{
-    const {query} = request;
-
-    console.log(query);
-
-    const result = users.filter((user) => user.uid === query.uid);
-
-    if (result.length === 0) {
-        return response.status(404).json({
-            error: "No encontrado",
-        });
-    }
-
-    response.json(result);
-};
 
 const listFollowing = async (req, res = response) => {
     const { email } = req.body;
@@ -65,7 +50,7 @@ const listFollowers = async (req, res= response) =>{
     }
 };
 module.exports = {
-    listUsers,
+    
     listFollowers,
     listFollowing,
 };

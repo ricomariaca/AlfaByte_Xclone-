@@ -14,7 +14,7 @@ describe('registerController.js', () => {
     beforeEach(() => {
       req = {
         body: {
-          phoneNumber: '1234567890',
+          phoneNumber: 1234567890,
           name: 'Usuario de Prueba',
           email: 'prueba@example.com',
           password: 'contrasena123',
