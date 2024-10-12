@@ -1,21 +1,8 @@
-
-const users = [
-    {
-      uid: 'asdw345dasdas',
-      email: "Emado@gmail.com",
-      username: "John Doe",
-    },
-    {
-      uid: 'k4jh5k4j5h4k5h4',
-      email: "majo@hotmail.com",
-      username: "Mike Jones",
-    },
-    {
-      uid: 'lmn4opq5rst6uv',
-      email: "brucemyQueen@gmail.com",
-      username: "Bruce Prince",
-    },
-  ];
+const { response, json } = require("express");
+const jwt = require('jsonwebtoken');
+const User = require('../../Auth/Models/User')
+const { JWT_SECRET } = process.env
+const bcrypt = require('bcrypt');
   
   const listUser = (request, response) => {
     const { query } = request;
@@ -30,31 +17,40 @@ const users = [
     response.json(result);
   };
   
-  const createUser = (request, response) => {
-    const { uid, email, username } = request;
-  
-    const userVerification = users.find((user) => user.uid === uid);
-    if (userVerification) {
-      return response.status(409).json({
-        error: "hey pa, ya existe mi fafa",
-      });
-    } else {
-      const CreateUser = {
-        uid,
-        email,
-        username,
-      };
-      users.push(CreateUser);
-  
-      response.status(201).json({
-        msj: "creación exitosa",
-        user: CreateUser
-      });
-    }
-  };
-  
-  module.exports = {
-    listUser,
-    createUser,
-  };
-  
+  const createUser = async (req, res = response) => {
+  const { phoneNumber, name, email, password,following,followers, id_user } = req.body;
+  const saltRounds = 10;
+
+  try {
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+   
+    let user = new User({ name, email, password: hashedPassword, phoneNumber, following,followers,id_user });
+
+    
+    await user.save();
+
+    
+    const token = jwt.sign({ email, name, phoneNumber }, JWT_SECRET, { expiresIn: "1h" });
+
+    res.status(201).json({
+      ok: true,
+      message: "User Registered",
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+      token,
+    });
+  } catch (error) {
+    console.log("(ERROR)", error);
+    res.status(500).json({
+      ok: false,
+      error: "SOMETHING WENT WRONG, CHECK YOUR DATA AGAIN",
+    });
+  }
+};
+
+module.exports = {
+  createUser,
+};

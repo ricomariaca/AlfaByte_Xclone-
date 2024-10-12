@@ -1,28 +1,33 @@
-const express = require("express");
-const app = express();
-const port = 2001;
 
-//const router = require("./routes/apiRoutes");
+require('dotenv').config();
+const express = require("express");
+const { dbConnection } = require('./Databases/config');
+const swaggerUI = require('swagger-ui-express');
+const swaggerSpec = require('./Config/Swagger.js');
+
+const { APP_PORT } = process.env
+
+const app = express();
+
+dbConnection();
+
 const routerPost = require("./Tweet/Router/apiRouter");
 const routerAuth = require("./Auth/Router/apiRouter");
 const routerFollow = require("./Follow/Router/apiRouter");
 
 
-// Middleware para manejar solicitudes con JSON
 app.use(express.json());
 
-// Middleware para manejar solicitudes con datos de formulario (urlencoded)
 app.use(express.urlencoded({ extended: true }));
-
-//app.get("/", (req, res) => {
-//    res.send("Hola, esta es una petición izy!");
-//});
 
 app.use('/api', routerPost);
 app.use('/api', routerAuth);
 app.use('/api', routerFollow);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
-app.listen(port, () => {
-    console.log(`La app esta escuchando en http://localhost:${port}`);
+
+app.listen(APP_PORT, () => {
+    console.log(`[INFO] SERVER RUNNING A ${APP_PORT}`);
+
 });
 //77
