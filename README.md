@@ -7,7 +7,7 @@
 * María José Velasquez
 * Emanuel Rico Mariaca
 **Descripción:**
-El objetivo principal es crear una plataforma donde los usuarios puedan registrarse, iniciar sesión, publicar tweets, seguir a otros usuarios y ver los tweets de sus seguidores y seguidos.
+*El objetivo principal es crear una plataforma donde los usuarios puedan registrarse, iniciar sesión, publicar tweets, seguir a otros usuarios y ver los tweets de sus seguidores y seguidos.
 **Requerimientos:**
 * Node.js para el desarrollo del backend.
 * Mongoose cómo ODM para manejar la base de datos MongoDB.
