@@ -25,6 +25,9 @@ app.use('/api', routerAuth);
 app.use('/api', routerFollow);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
+
 app.listen(APP_PORT, () => {
     console.log(`[INFO] SERVER RUNNING A ${APP_PORT}`);
+
 });
+//77
