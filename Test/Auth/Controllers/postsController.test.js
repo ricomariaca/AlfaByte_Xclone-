@@ -52,7 +52,7 @@ describe('Pruebas de createPost', () => {
 
         Tweet.mockImplementation(() => {
             return {
-                save: jest.fn().mockRejectedValue(new Error('Database error')), // Mock rejection
+                save: jest.fn().mockRejectedValue(new Error('Database error')), 
             };
         });
 
