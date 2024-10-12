@@ -18,7 +18,7 @@ describe("loginController.js", () => {
         });
         const res = httpMocks.createResponse();
 
-        User.findOne.mockResolvedValue(null); // Simular que el usuario no existe
+        User.findOne.mockResolvedValue(null); 
 
         await LoginUser(req, res);
 
