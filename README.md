@@ -27,5 +27,10 @@
 **Instrucciones de compilación y ejecución:**
 1. Clonar el repositorio: https://github.com/ricomariaca/AlfaByte_Xclone-
 2. Ejecutar `npm install` para instalar las dependencias necesarias. 
-3. Ejecutar `npm run dev` para iniciar la aplicación.
 4. Ejecutar `npm run coverage` para ver el resultado de las pruebas.
+5. Descargar MongoCompass y ejecutarlo
+6. Ingresar MongoAtlas, solicitar al equipo del proyecto que te dé acceso a la DB
+7. Agregar la ip al proyecto para que te deje conectarte a la DB
+8. Confirar la dirección del compas mongodb+srv://[MONGO_ATLAS_DB_USER]:[MONGO_ATLAS_DB_PASSWORD]@databasesx.silq0.mongodb.net/
+9. Solicitar la contraseña y usuario de acceso
+10. Ejecutar `npm run dev` para iniciar la aplicación.
