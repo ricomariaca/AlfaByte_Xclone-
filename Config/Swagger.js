@@ -8,7 +8,7 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./Auth/Router/*.js'],
+  apis: ['./Auth/Router/*.js', './Follow/Router/*.js'],
   
   
 };
