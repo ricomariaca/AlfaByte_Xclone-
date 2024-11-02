@@ -24,16 +24,7 @@ const UserSchema = Schema({
         type: Number, 
         ref: 'User',
         required:false
-      },
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      name: {
-        type: String,
-        required: false,
-      },
+      }
     },
   ],
   followers: [
@@ -42,16 +33,7 @@ const UserSchema = Schema({
         type: Number,
         ref: 'User',
         required:false
-      },
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      name: {
-        type: String,
-        required: false,
-      },
+      }
     },
   ],
 });
