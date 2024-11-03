@@ -5,10 +5,10 @@ const { JWT_SECRET } = process.env;
 const bcrypt = require('bcrypt');
 
 const LoginUser = async (req, res = response) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({
         ok: false,
@@ -24,7 +24,7 @@ const LoginUser = async (req, res = response) => {
     }
 
     const token = jwt.sign(
-      { email: user.email, name: user.name },
+      { username: user.username, name: user.name, userPhoto: user.userPhoto },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -34,7 +34,10 @@ const LoginUser = async (req, res = response) => {
       message: "You are logged in",
       user: {
         id: user.id,
-        email: user.email,
+        username: user.username,
+        name: user.name,
+        userPhoto: user.userPhoto
+
       },
       token,
     });

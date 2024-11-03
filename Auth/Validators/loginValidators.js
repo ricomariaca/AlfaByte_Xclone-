@@ -1,9 +1,9 @@
 const { check } = require('express-validator');
 
 const validateLogin = [
-  check('email')
-    .isEmail().withMessage('Debe proporcionar un correo electrónico válido')
-    .notEmpty().withMessage('El correo electrónico es obligatorio'),
+  check('username')
+    .notEmpty().withMessage('El username es obligatorio')
+    .isLength({ min: 6 }).withMessage('El username debe tener al menos 6 caracteres'),
   
   check('password')
     .notEmpty().withMessage('La contraseña es obligatoria')

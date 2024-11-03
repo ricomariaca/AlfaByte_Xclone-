@@ -4,10 +4,13 @@ const express = require("express");
 const { dbConnection } = require('./Databases/config');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./Config/Swagger.js');
+const cors = require('cors');
 
 const { APP_PORT } = process.env
 
 const app = express();
+app.use(cors());
+
 
 dbConnection();
 
