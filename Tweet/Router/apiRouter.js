@@ -10,31 +10,22 @@ const { validationResult } = require('express-validator');
  *     Post:
  *       type: object
  *       required:
- *         - title
- *         - content
+ *         - user
+ *         - tweet
  *       properties:
- *         title:
+ *         user:
  *           type: string
- *           description: Título del post
- *         content:
+ *           description: Nombre del usuario que publicó el tweet
+ *         tweet:
  *           type: string
- *           description: Contenido del post
- *         tags:
- *           type: array
- *           items:
- *             type: string
- *           description: Etiquetas asociadas al post
- *         userId:
- *           type: string
- *           description: ID del usuario que creó el post
+ *           description: Contenido del tweet
  */
 
 /**
  * @swagger
- * /api/posts/createPosts:
+ * /api/posts/createPost:
  *   post:
- *     summary: Crea un nuevo post
- *     tags: [Posts]
+ *     summary: Crea un nuevo tweet
  *     requestBody:
  *       required: true
  *       content:
@@ -43,7 +34,7 @@ const { validationResult } = require('express-validator');
  *             $ref: '#/components/schemas/Post'
  *     responses:
  *       201:
- *         description: Post creado exitosamente
+ *         description: Tweet creado exitosamente
  *         content:
  *           application/json:
  *             schema:
