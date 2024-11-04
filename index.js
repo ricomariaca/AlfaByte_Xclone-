@@ -16,7 +16,11 @@ const webServer = http.createServer(app);
 const io = new Server(webServer, {
     connectionStateRecovery: {},
     cors: {
+<<<<<<< HEAD
       origin: "http://localhost:5175",
+=======
+      origin: "http://localhost:5174",
+>>>>>>> 60162ec533235d617d102113918dc3b3c19a5dc0
     },
   });
 
