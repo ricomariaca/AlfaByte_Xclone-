@@ -33,7 +33,7 @@ const LoginUser = async (req, res = response) => {
       ok: true,
       message: "You are logged in",
       user: {
-        id: user.id,
+        id_user: user.id,
         username: user.username,
         name: user.name,
         userPhoto: user.userPhoto

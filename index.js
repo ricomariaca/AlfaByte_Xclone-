@@ -16,7 +16,7 @@ const webServer = http.createServer(app);
 const io = new Server(webServer, {
     connectionStateRecovery: {},
     cors: {
-      origin: "http://localhost:5173",
+      origin: "http://localhost:5174",
     },
   });
 
