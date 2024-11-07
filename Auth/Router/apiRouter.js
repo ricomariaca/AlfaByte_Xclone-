@@ -16,22 +16,26 @@ const { validationResult } = require('express-validator');
  *       type: object
  *       required:
  *         - name
+ *         - lastName
+ *         - username
  *         - email
  *         - password
- *         - phoneNumber
  *       properties:
  *         name:
  *           type: string
  *           description: Nombre del usuario
+ *         lastName:
+ *           type: string
+ *           description: Apellido del usuario
+ *         username:
+ *           type: string
+ *           description: Nombre de usuario
  *         email:
  *           type: string
  *           description: Correo electrónico del usuario
  *         password:
  *           type: string
  *           description: Contraseña del usuario
- *         phoneNumber:
- *           type: string
- *           description: Número de teléfono del usuario
  *         following:
  *           type: array
  *           description: Lista de usuarios que sigue (opcional)
@@ -43,27 +47,28 @@ const { validationResult } = require('express-validator');
  *           items:
  *             type: string
  *       example:
- *         name: "John Doe"
- *         email: "johndoe@example.com"
+ *         name: "John"
+ *         lastName: "Doe"
+ *         username: "JohnDoe"
+ *         email: "john.doe@example.com"
  *         password: "password123"
- *         phoneNumber: "1234567890"
  *         following: []
  *         followers: []
- * 
+
  *     UserLogin:
  *       type: object
  *       required:
- *         - email
+ *         - username
  *         - password
  *       properties:
- *         email:
+ *         username:
  *           type: string
- *           description: Correo electrónico del usuario
+ *           description: Nombre de usuario
  *         password:
  *           type: string
  *           description: Contraseña del usuario
  *       example:
- *         email: "johndoe@example.com"
+ *         username: "JohnDoe"
  *         password: "password123"
  */
 
@@ -107,19 +112,6 @@ const { validationResult } = require('express-validator');
  *                   description: Token JWT generado
  *       400:
  *         description: Error en los datos proporcionados
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 errors:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       msg:
- *                         type: string
- *                         description: Descripción del error
  *       500:
  *         description: Error interno del servidor
  */
@@ -152,22 +144,13 @@ const { validationResult } = require('express-validator');
  *                   description: Token JWT generado
  *       400:
  *         description: Error en los datos proporcionados
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 errors:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       msg:
- *                         type: string
- *                         description: Descripción del error
  *       500:
  *         description: Error interno del servidor
  */
+
+
+
+
 routerAuth.post('/register', validateCreateUser, (req, res, next) => {
  
   const errors = validationResult(req);
