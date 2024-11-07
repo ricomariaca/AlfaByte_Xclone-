@@ -2,11 +2,11 @@ const {response } = require('express');
 const Tweet =require('../../Tweet/Models/Tweet')
 
 const createPost = async (req, res = response) => {
-    const { title, body, id_User} = req.body;
+    const {  body, username} = req.body;
   
     try {
      
-      let tweet = new Tweet({  title, body, id_User });
+      let tweet = new Tweet({  body, username });
 
       await tweet.save();
   
@@ -15,9 +15,9 @@ const createPost = async (req, res = response) => {
         message: "tweet save",
         user: {
           id_tweet: tweet.id,
-          title: tweet.email,
+          
           body: tweet.body,
-         id_user: tweet.id_User
+         username: tweet.username
         },
       });
     } catch (error) {

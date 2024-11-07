@@ -2,6 +2,7 @@ const express = require("express");
 const routerPost = express.Router();
 const { validatePost } = require('../Validators/postsValidators');
 const { validationResult } = require('express-validator');
+const { createPost } = require('../../Tweet/Controllers/postsController');
 
 /**
  * @swagger

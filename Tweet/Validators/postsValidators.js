@@ -2,12 +2,8 @@ const { check } = require('express-validator');
 
 
 const validatePost = [
-  check('id_User')
-  .notEmpty().withMessage('El posts debe de traer el id_usuario'),
-
-  check('title')
-    .notEmpty().withMessage('El título es obligatorio') 
-    .isLength({ min: 3 }).withMessage('El título debe tener al menos 5 caracteres'),
+  check('username')
+  .notEmpty().withMessage('El posts debe de traer el username'),
 
   check('body')
     .notEmpty().withMessage('El cuerpo del post es obligatorio') 
