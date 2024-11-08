@@ -3,6 +3,7 @@ const routerPost = express.Router();
 const { validatePost } = require('../Validators/postsValidators');
 const { validationResult } = require('express-validator');
 const { createPost } = require('../../Tweet/Controllers/postsController');
+const { getAllTweets } = require('../../Tweet/Controllers/GetController');
 
 /**
  * @swagger
@@ -77,6 +78,14 @@ routerPost.post('/createPosts', validatePost, (req, res, next) => {
 
     
     createPost(req, res);
+});
+
+routerPost.get('/getAllTweets', (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    getAllTweets(req, res);
 });
 
 module.exports = routerPost;
