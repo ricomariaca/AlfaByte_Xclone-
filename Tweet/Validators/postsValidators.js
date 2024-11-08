@@ -7,7 +7,7 @@ const validatePost = [
 
   check('body')
     .notEmpty().withMessage('El cuerpo del post es obligatorio') 
-    .isLength({ min: 10,max: 255 }).withMessage('El cuerpo del post debe tener al menos 10 caracteres y maximo 255'),
+    .isLength({ min: 2,max: 255 }).withMessage('El cuerpo del post debe tener al menos 10 caracteres y maximo 255'),
 ];
 
 module.exports = {
