@@ -124,7 +124,7 @@ const { listFollowing, listFollowers, createFollowing } = require('../../Follow/
 
 
 
-  routerFollow.get('/following/:username', (req, res) => {
+  routerFollow.get('/following', (req, res, next) => {
     
       listFollowing(req, res);
   });
