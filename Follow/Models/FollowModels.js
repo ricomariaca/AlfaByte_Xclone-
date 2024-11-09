@@ -1,19 +1,19 @@
 const { Schema, model } = require('mongoose');
 
 const UserSchema = Schema({
-  name: {
+  usernameSeguidor: {
     type: String,
-    require: true
+    require: false
   },
-  email: {
+  usernameSeguido: {
     type: String,
-    require: true,
-    unique: true
+    require: false,
+    
   },
-  password: {
+  body: {
     type: String,
-    require: true
+    require: false
   }
 });
 
-module.exports = model('User', UserSchema);
+module.exports = model('Follow', UserSchema);

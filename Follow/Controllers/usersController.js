@@ -1,13 +1,14 @@
 
 const { response } = require('express');
-const User = require('../../Auth/Models/User')
+const Follow = require('../../Follow/Models/FollowModels')
+
 
 const listFollowing = async (req, res = response) => {
-    const { email } = req.body;
+    const { usernameSeguidor } = req.body;
 
     try {
-        const user = await User.findOne({ email });
-      if (!user) {
+        const follow = await Follow.find({ usernameSeguidor });
+      if (!follow) {
         return res.status(404).json({
           ok: false,
           error: "Usuario no encontrado!",
@@ -15,7 +16,7 @@ const listFollowing = async (req, res = response) => {
       }
         res.status(200).json({
             ok: true,
-            following: user.following
+            follow
         });
 
     } catch (error) {
@@ -26,31 +27,73 @@ const listFollowing = async (req, res = response) => {
         });
     }
 };
-const listFollowers = async (req, res= response) =>{
-    const { email } = req.body;
-    try {
-        const user = await User.findOne({ email });
-      if (!user) {
-        return res.status(404).json({
-          ok: false,
-          error: "Usuario no encontrado!",
-        });
-      }
-        res.status(200).json({
-            ok: true,
-            followers: user.followers
-        });
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            ok: false,
-            msg: 'Error al obtener la lista de followers.'
-        });
+
+const listFollowers = async (req, res = response) => {
+  const { usernameSeguido } = req.body;
+
+  try {
+      const follow = await Follow.find({ usernameSeguido });
+    if (!follow) {
+      return res.status(404).json({
+        ok: false,
+        error: "Usuario no encontrado!",
+      });
     }
+      res.status(200).json({
+          ok: true,
+          follow
+      });
+
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({
+          ok: false,
+          msg: 'Error al obtener la lista de following.'
+      });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+const createFollowing = async (req, res = response) => {
+  const { usernameSeguidor, usernameSeguido, body } = req.body;
+
+  try {
+    // Crea una instancia de Follow
+    let follow = new Follow({ usernameSeguidor, usernameSeguido, body });
+
+    // Guarda la instancia
+    await follow.save();
+
+    res.status(201).json({
+      ok: true,
+      message: "Follow saved",
+      user: {
+        id_follow: follow._id,
+        usernameSeguidor: follow.usernameSeguidor,
+        usernameSeguido: follow.usernameSeguido,
+        body: follow.body,
+      },
+    });
+  } catch (error) {
+    console.log("(ERROR)", error);
+    res.status(500).json({
+      ok: false,
+      error: "SOMETHING WENT WRONG, CHECK YOUR DATA AGAIN",
+    });
+  }
 };
 module.exports = {
     
     listFollowers,
     listFollowing,
+    createFollowing
 };

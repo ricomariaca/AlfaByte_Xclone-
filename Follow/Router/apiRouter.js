@@ -4,7 +4,7 @@ const { FollowValidators} = require('../../Follow/Validators/FollowValidators');
 const { validationResult } = require('express-validator');
 
 
-const { listFollowing, listFollowers } = require('../../Follow/Controllers/usersController');
+const { listFollowing, listFollowers, createFollowing } = require('../../Follow/Controllers/usersController');
 /**
  * @swagger
  * components:
@@ -121,20 +121,27 @@ const { listFollowing, listFollowers } = require('../../Follow/Controllers/users
  */
 
 
-routerFollow.get('/following', FollowValidators, (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    listFollowing(req, res, next);
+
+
+
+  routerFollow.get('/following/:username', (req, res) => {
+    
+      listFollowing(req, res);
   });
 
-  routerFollow.get('/followers', FollowValidators, (req, res, next) => {
+  
+
+  routerFollow.get('/followers',  (req, res, next) => {
+   
+    listFollowers(req, res, next);
+  });
+
+  routerFollow.post('/createfollowing', FollowValidators, (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    listFollowers(req, res, next);
+    createFollowing(req, res, next);
   });
 
 
