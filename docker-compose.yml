@@ -1,0 +1,7 @@
+services: 
+  node:
+    container_name: api-node-alfabyte
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
