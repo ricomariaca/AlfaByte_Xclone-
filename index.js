@@ -1,10 +1,10 @@
 
 require('dotenv').config();
+
 const express = require("express");
 const { dbConnection } = require('./Databases/config');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./Config/Swagger.js');
-
 const { APP_PORT } = process.env
 
 const app = express();
@@ -25,9 +25,9 @@ app.use('/api', routerAuth);
 app.use('/api', routerFollow);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
-
 app.listen(APP_PORT, () => {
     console.log(`[INFO] SERVER RUNNING A ${APP_PORT}`);
 
 });
+
 //77
